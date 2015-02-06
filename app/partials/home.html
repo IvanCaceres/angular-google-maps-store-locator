@@ -1,0 +1,49 @@
+ 	<div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Store Locator App</h3>
+      </div>
+      <div class="row search-wrap">
+            <h1>Search</h1>
+            <form ng-submit="search()">
+              <input type="text" class="form-control" ng-model="address">
+              <select class="form-control" ng-options="radius.label for radius in distanceChoices" ng-model="radius">
+                <option value="">Distance</option>
+              </select>
+            </form>
+      </div><!-- /.row -->
+      <div class="jumbotron">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
+            <ui-gmap-markers models="map.stores" coords="'coords'" control="">
+              <ui-gmap-windows show="show" options="windowOptions" control="map.storesControl" doRebuildAll="map.rebuild">
+                <div ng-non-bindable>{{name}}</div>
+              </ui-gmap-windows>
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+        <h1>Store Results: {{radius.label}}</h1>
+        <div class="list-group">
+
+<!--           <a href="#" class="list-group-item active">
+            Cras justo odio
+          </a> -->
+          <a href="" class="list-group-item" ng-repeat="store in map.stores" ng-click="selectStore(store)" ng-class="{active: map.active == store}">
+            {{store.name}}<br>
+            {{store.telephone}}<br>
+            {{store.street}}<br>
+            {{store.city}}, {{store.region}} {{store.postal}}
+          </a>
+        </div>
+      </div>
+
+      <div class="row">
+
+      </div>
+
+      <footer class="footer">
+        <p>© Company 2014</p>
+      </footer>
